@@ -1,0 +1,12 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %}
+
+<!-- Название у нас будет Новости -->
+{% block title %}
+Категории
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все посты -->
+{% block content %}
+<h1>{{ newscategory }}</h1>
+{% endblock content %}

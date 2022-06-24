@@ -1,0 +1,53 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% load custom_tags %}
+
+{% block title %}
+Новости
+{% endblock title %}
+
+{% block content %}
+<h1>Все посты - {{newspost|length }}</h1>
+
+<h3>{% current_time '%b %d %Y %H:%m' %}</h3>
+
+<h1>{{newspost.post.title }}</h1>
+
+<h3>{{ time_now|date:'d M Y H:m' }}</h3> <!-- Здесь мы применяем фильтр date. Он очень похож на метод strftime у даты.
+С его помощью мы можем выводить дату в нужном нам формате -->
+<h3> {{ value1|default_if_none:"Ой, все пропало!" }} </h3> <!-- Здесь, если в переменной value1 будет записано None,
+то выведется текст Ой, все пропало! -->
+<hr>
+{% if newspost %}
+<table>
+    <tr>
+        <td>
+            Пост
+        </td>
+        <td>
+            Дата
+        </td>
+        <td>
+            Содержание
+        </td>
+    </tr>
+    {% for post in newspost %}
+    <tr>
+        <td>
+            {{ post.title }}
+        </td>
+        <td>
+            {{ post.dateCreation }}
+        </td>
+        <td>
+            {{ post.text|truncatechars:20 }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h2>Статей нет!</h2>
+{% endif %}
+{% endblock content %}
